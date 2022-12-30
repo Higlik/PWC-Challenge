@@ -8,33 +8,33 @@ const btn = document.querySelector("#send")
         //atribuir o endereço em value
         const value = addressColector.value;
         
-
         //Armazena o endereço
-        var container = [];
+        var container = []; 
 
-
-        //regex para filtrar o endereço
-        exp = /([A-Z]*[a-zçíãõé]+\s*) (\d*\s*[A-Z]*[a-z]*)/;
-
+        //Realiza a busca da regex
+        exp = /^([a-zçíãáõé\s]+) ([\d\sa-z]*)$/i
         //Realiza a função do regex
         result = exp.exec(value);
         //Apaga o primeiro indice do conteiner
-        result.shift();
 
 
-        //Valida se a pesquisa atende endereço simples
+        //Valida se a pesquisa atende o endereços do desafio 1 e 2    
         if(exp.test(value) == true) {
             container.push(result);
+            container.shift();
+        }else if (exp.test(value) == false) {
+            exp = /^([\d\s]+) ([a-zçíãáõé\s]+)$/i;
+            result = exp.exec(value);
+            if(exp.test(value) == true){
+                container.push(result);
+            }
 
-        }
-
-
-
-
+    
 
         //Printa na text area o resultado da regex
-            var address = container;
+            var address = "Endereço: "+container;
             document.getElementById("showAdrress").innerHTML = address; 
 
+            //finalizando versão 2
 
-    });
+    }});
